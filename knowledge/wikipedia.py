@@ -1,4 +1,6 @@
 """
+knowledge: wikipedia.py
+
 Module for handling API requests to wikipedia
 """
 import requests
@@ -8,9 +10,13 @@ API_ROOT = 'https://en.wikipedia.org/w/api.php'
 
 def send_requests(wordlist):
     """
-    Sends requests to WikiMedia API. Asynchronous
-    calls are not needed because API allows multiple
-    articles to be requested at once.
+    Public: (List) -> List
+
+    Sends requests to WikiMedia API.
+
+    Example:
+    >>> send_requests(['red', 'green', 'blue'])
+    >>> [{'word' : 'red', 'definition' : 'color'}, ...]
     """
     url = pack_url(normalize_titiles(wordlist))
     print url
@@ -18,27 +24,21 @@ def send_requests(wordlist):
     # print requests.status_code
 
 
-def normalize_titiles():
+def normalize_titiles(wordlist):
     """
+    Internal: (List) -> List
+
     Normalizes the article titles from API specification:
-    https://www.mediawiki.org/wiki/API:Query
-
-    Parameters:
-    - wordlist: List
-
-    Returns: String
+    https://www.mediawiki.org/wiki/API:Query#Title_normalization
     """
     pass
 
 
 def pack_url(titles):
     """
+    Internal: (String) -> String
+
     Creates a URL for api request to WikiMedia.
-
-    Parameters:
-    - titles: String (ex. 'Blue|Green|Red')
-
-    Returns: String
     """
     query = {
         'format' : 'json',

@@ -7,7 +7,7 @@ Future Milestones:
 3. Save results as a pdf through PyTeX
 4. Caching results
 """
-from studytools import definitions
+from knowledge import definitions
 
 
 def main():
