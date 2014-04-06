@@ -9,9 +9,11 @@ of each concept taken from Wikipedia or WolframAlpha.
 1. Design modular project skeleton
 2. Integrate with WikiMedia API
 3. Integrate with WolframAlpha API
-4. Generate pdf document with PyTeX(?)
-5. Add image support
-6. Improve pdf layout and design
+4. Generate word documents
+5. Generate pdf documents
+6. Add image support
+7. Add configration options
+8. Improve pdf layout and design
 
 ### Future Projects
 1. Create Restful Flask API
