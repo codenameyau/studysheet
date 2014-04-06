@@ -2,10 +2,10 @@
 StudySheet - Simple study sheets
 
 Future Milestones:
-1. Integrate with WolframAlpha API
-2. Add script arguments for filename
+1. Integrate with WikiMedia API
+2. Integrate with WolframAlpha API
 3. Save results as a pdf through PyTeX
-4. Caching results
+4. Parse and include images in pdfs
 """
 from knowledge import definitions
 
