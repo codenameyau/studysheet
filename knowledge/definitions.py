@@ -33,8 +33,9 @@ def ask_wikipedia(wordlist):
 
     Sends requests to wikipedia to retreive definitions.
     """
-    content = wikipedia.send_requests(wordlist)
-    print content
+    json_content = wikipedia.send_requests(wordlist)
+    paragraphs = wikipedia.get_first_paragraph(json_content)
+    print paragraphs
 
 
 # Functions

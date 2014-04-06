@@ -4,34 +4,45 @@ knowledge: wikipedia.py
 Module for handling API requests to wikipedia
 """
 import requests
+import json
 
 API_ROOT = 'https://en.wikipedia.org/w/api.php'
 
 
 def send_requests(wordlist):
     """
-    Public: (List) -> List
+    Public: (List) -> Dictionary
 
-    Sends requests to WikiMedia API.
+    Sends requests to WikiMedia API. If requests is successful,
+    returns a Dictionary from the response JSON content.
 
     Example:
-    >>> send_requests(['red', 'green', 'blue'])
-    >>> [{'word' : 'red', 'definition' : 'color'}, ...]
+    >> send_requests(['red', 'green', 'blue'])
     """
-    url = pack_url(normalize_titiles(wordlist))
-    print url
-    # requests.get(url)
-    # print requests.status_code
+    url = pack_url(_normalize_titiles(wordlist))
+    req = requests.get(url)
+    if req.status_code == 200:
+        return json.loads(req.content)
 
 
-def normalize_titiles(wordlist):
+def get_first_paragraph(json_content):
     """
-    Internal: (List) -> List
+    Public: (Dictionary) -> List
 
-    Normalizes the article titles from API specification:
-    https://www.mediawiki.org/wiki/API:Query#Title_normalization
+    Parses JSON to extract the first paragraph for each entry.
     """
     pass
+
+
+def _normalize_titiles(wordlist):
+    """
+    Private: (List) -> List
+
+    Builds up a string from words in wordlist and
+    seperates each word with a '|' for titles query.
+    """
+    # Removes trailing '|'
+    return '|'.join(wordlist)[:-1]
 
 
 def pack_url(titles):
@@ -57,5 +68,4 @@ def pack_url(titles):
             else:
                 query_string += '&%s=%s' % (key, value)
     return API_ROOT + query_string
-
 
