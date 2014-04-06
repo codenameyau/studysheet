@@ -19,7 +19,7 @@ def main():
     wordlist = []
     with open(FILENAME) as f:
         wordlist = f.read().split('\n')
-    concepts = definitions.get_definitions(wordlist, 'wikipedia')
+        definitions.create_studysheet(wordlist, 'wikipedia')
 
 
 if __name__ == '__main__':

@@ -12,9 +12,10 @@ Future sources:
 """
 import sys
 import wikipedia
+import transcriber
 
 
-def get_definitions(wordlist, source):
+def create_studysheet(wordlist, source):
     """
     Public: (List, String) -> List
 
@@ -22,7 +23,8 @@ def get_definitions(wordlist, source):
     Calls the corresponding function from SOURCES.
     """
     if source in SOURCES:
-        source_content = SOURCES[source](wordlist)
+        content = SOURCES[source](wordlist)
+        transcriber.generate_doc(content, source)
     else:
         sys.exit("EXIT: %s is not available" % source)
 
@@ -31,11 +33,10 @@ def ask_wikipedia(wordlist):
     """
     Internal: (List) -> List
 
-    Sends requests to wikipedia to retreive definitions.
+    Sends requests to wikipedia to retrieve definitions.
     """
     json_content = wikipedia.send_requests(wordlist)
-    paragraphs = wikipedia.get_first_paragraph(json_content)
-    print paragraphs
+    return wikipedia.get_first_paragraph(json_content)
 
 
 # Functions

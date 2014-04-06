@@ -44,29 +44,6 @@ def get_first_paragraph(json_content):
     return parsed_entries
 
 
-def _normalize_titiles(wordlist):
-    """
-    Private: (List) -> List
-
-    Builds up a string from words in wordlist and
-    seperates each word with a '|' for titles query.
-    """
-    # Removes trailing '|'
-    return '|'.join(wordlist)[:-1]
-
-
-def _clean_paragraph(html):
-    """
-    Private: (String) -> String
-
-    Finds first paragraph, strips html tags and citations.
-    Paragraph is returned with unicode characters.
-    """
-    soup = BeautifulSoup(html)
-    first_paragraph = soup.p.get_text()
-    return re.sub(r'\[\d+\]', '', first_paragraph)
-
-
 def pack_url(titles):
     """
     Internal: (String) -> String
@@ -93,3 +70,24 @@ def pack_url(titles):
                 query_string += '&%s=%s' % (key, value)
     return API_ROOT + query_string
 
+
+def _normalize_titiles(wordlist):
+    """
+    Private: (List) -> List
+
+    Builds up a string from words in wordlist and
+    seperates each word with a '|' for titles query.
+    """
+    # Removes trailing '|'
+    return '|'.join(wordlist)[:-1]
+
+
+def _clean_paragraph(html):
+    """
+    Private: (String) -> String
+
+    Finds first paragraph, strips html tags and citations.
+    Paragraph is returned with unicode characters.
+    """
+    first_paragraph = BeautifulSoup(html).p.get_text()
+    return re.sub(r'\[\d+\]', '', first_paragraph)
