@@ -5,6 +5,7 @@ Module for handling API requests to wikipedia
 """
 import requests
 import json
+import re
 
 API_ROOT = 'https://en.wikipedia.org/w/api.php'
 
@@ -31,7 +32,13 @@ def get_first_paragraph(json_content):
 
     Parses JSON to extract the first paragraph for each entry.
     """
-    pass
+    pages = json_content['query']['pages']
+    parsed_entries = []
+    for entry in pages:
+        content = pages[entry]
+        paragraph = content['revisions']['*']
+        data = {}
+        data['title'] = content['title']
 
 
 def _normalize_titiles(wordlist):
