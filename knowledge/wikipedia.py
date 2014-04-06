@@ -37,10 +37,11 @@ def get_first_paragraph(json_content):
     parsed_entries = []
     for entry in pages:
         content = pages[entry]
-        paragraph = content['revisions'][0]['*']
-        print paragraph
         data = {}
         data['title'] = content['title']
+        data['intro'] = _clean_paragraph(content['revisions'][0]['*'])
+        parsed_entries.append(data)
+    return parsed_entries
 
 
 def _normalize_titiles(wordlist):
@@ -54,6 +55,18 @@ def _normalize_titiles(wordlist):
     return '|'.join(wordlist)[:-1]
 
 
+def _clean_paragraph(html):
+    """
+    Private: (String) -> String
+
+    Finds first paragraph, strips html tags and citations.
+    Paragraph is returned with unicode characters.
+    """
+    soup = BeautifulSoup(html)
+    first_paragraph = soup.p.get_text()
+    return re.sub(r'\[\d+\]', '', first_paragraph)
+
+
 def pack_url(titles):
     """
     Internal: (String) -> String
@@ -61,11 +74,13 @@ def pack_url(titles):
     Creates a URL for api request to WikiMedia.
     """
     query = {
-        'format' : 'json',
-        'action' : 'query',
-        'titles' : titles,
-        'prop'   : 'revisions',
-        'rvprop' : 'content'
+        'action'    : 'query',
+        'format'    : 'json',
+        'titles'    : titles,
+        'prop'      : 'revisions',
+        'rvprop'    : 'content',
+        'rvsection' : '0',
+        'rvparse'   : 'true'
     }
 
     # Build URL for API request
