@@ -3,6 +3,7 @@ knowledge: wikipedia.py
 
 Module for handling API requests to wikipedia
 """
+from bs4 import BeautifulSoup
 import requests
 import json
 import re
@@ -36,7 +37,8 @@ def get_first_paragraph(json_content):
     parsed_entries = []
     for entry in pages:
         content = pages[entry]
-        paragraph = content['revisions']['*']
+        paragraph = content['revisions'][0]['*']
+        print paragraph
         data = {}
         data['title'] = content['title']
 

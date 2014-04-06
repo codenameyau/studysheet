@@ -1,8 +1,8 @@
 studysheet
 ==========
 
-StudySheet is a python script that takes a list of words,
-and creates a study sheet with a paragraph introduction
+StudySheet is a python script that takes a list of concepts,
+and creates a pdf study sheet with a paragraph introduction
 of each concept from Wikipedia or WolframAlpha.
 
 ## Milestone Tasks
@@ -13,9 +13,9 @@ of each concept from Wikipedia or WolframAlpha.
 5. Add image support
 6. Improve pdf layout and design
 
-## Future Projects
+### Future Projects
 1. Create Restful Flask API
 2. Create Angular web app or iOS mobile app
 
-## Documentation
+## Documentation Guide
 Use [mini-docs](https://github.com/codenameyau/mini-docs) for function docstrings.
