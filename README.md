@@ -1,9 +1,9 @@
 studysheet
 ==========
 
-StudySheet is a python script that takes a list of concepts,
-and creates a word document or PDF studysheet with an brief
-introduction of each concept taken from Wikipedia or WolframAlpha.
+StudySheet is a python script that takes a list of concepts or questions,
+and creates a word document or PDF studysheet with a summary paragraph
+taken from Wikipedia or an answer from computed from WolframAlpha.
 
 ## API Keys
 To use the WolframAlpha module, you must sign up for an
@@ -25,5 +25,5 @@ Then edit `knowledge/apikeys.py` and set `WOLFRAM` to your API key.
 * Create Restful Flask API
 * Create Angular web app or iOS mobile app
 
-## Documentation Guide
+## Documentation Guidelines
 Use [mini-docs](https://github.com/codenameyau/mini-docs) for function docstrings.

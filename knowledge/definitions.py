@@ -28,7 +28,7 @@ def create_studysheet(wordlist, source):
     """
     if source in SOURCES:
         content = SOURCES[source](wordlist)
-        transcriber.generate_doc(content, source)
+        transcriber.generate_doc(content, source, 'simple')
     else:
         sys.exit("EXIT: %s is not available" % source)
 
@@ -49,7 +49,7 @@ def ask_wolfram(wordlist):
 
     Sends requests to WolframAlpha to ask for questions.
     """
-    content = wolfram.send_requests(wordlist)
+    return wolfram.send_requests(wordlist)
 
 
 # Functions

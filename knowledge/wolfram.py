@@ -3,6 +3,9 @@ knowledge: wolfram.py
 
 Contains methods to query data from WolframAlpha.
 Please edit 'apikeys.py' to include your API key!
+
+Note that non-commercial WolframAlpha API usage
+has a max quota of 2000 queries per month.
 """
 from apikeys import WOLFRAM
 import truthseeker
