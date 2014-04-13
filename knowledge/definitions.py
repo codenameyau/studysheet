@@ -44,7 +44,7 @@ def ask_wolfram(wordlist):
     """
     Internal: (List) -> List
 
-    Sends requests to WolframAlpha to ask for definitions
+    Sends requests to WolframAlpha to ask for questions.
     """
     content = wolfram.send_requests(wordlist)
     print content
