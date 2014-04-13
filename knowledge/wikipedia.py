@@ -83,5 +83,8 @@ def _clean_paragraph(html):
     Finds first paragraph, strips html tags and citations.
     Paragraph is returned with unicode characters.
     """
-    first_paragraph = BeautifulSoup(html).p.get_text()
-    return re.sub(r'\[\d+\]', '', first_paragraph)
+    soup = BeautifulSoup(html)
+    paragraphs = soup.find_all('p', limit=3)
+    for entry in paragraphs:
+        if len(entry) > 5:
+            return re.sub(r'\[\d+\]', '', entry.get_text())

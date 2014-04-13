@@ -22,10 +22,13 @@ def create_studysheet(wordlist, source):
 
     Gets all definitions of words in wordlist from source.
     Calls the corresponding function from SOURCES.
+
+    Example:
+    >> create_studysheet(['love', 'bug'], 'wikipedia')
     """
     if source in SOURCES:
         content = SOURCES[source](wordlist)
-        # transcriber.generate_doc(content, source)
+        transcriber.generate_doc(content, source)
     else:
         sys.exit("EXIT: %s is not available" % source)
 
