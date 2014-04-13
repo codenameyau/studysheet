@@ -11,7 +11,7 @@ import docx
 
 
 # Directory to output documents
-OUTPUT_DIR = 'studysheet-docs/'
+OUTPUT_DIR = 'studysheets/'
 
 
 def generate_doc(content, source):
