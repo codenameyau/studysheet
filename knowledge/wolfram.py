@@ -35,15 +35,17 @@ def send_requests(wordlist):
     answers = []
     for res in reqs:
         if res.status_code == 200:
-            xmldata = xmltodict.parse(res.content)['queryresult']
+            xmldata  = xmltodict.parse(res.content)['queryresult']
+            question = wordlist[len(answers)]
             try:
-                title = wordlist[len(answers)]
-                answers.append(_parse_content(xmldata))
-                print "[+] Found: %s" % title
+                title   = xmldata['pod'][0]['subpod']['plaintext']
+                content = xmldata['pod'][1]['subpod']['plaintext']
+                answers.append({
+                    'title'   : title,
+                    'content' : content
+                })
+                print "[+] Found: %s" % question
             except KeyError:
-                print "[-] Missing: %s" % title
+                print "[-] Missing: %s" % question
     return answers
 
-
-def _parse_content(data):
-    pass

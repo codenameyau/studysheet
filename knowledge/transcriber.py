@@ -59,7 +59,7 @@ def _format_wikipedia_doc(content, source):
     document = docx.Document()
     for entry in content:
         document.add_heading(entry['title'], 1)
-        document.add_paragraph(entry['intro'])
+        document.add_paragraph(entry['content'])
     _save_document(document, source)
 
 

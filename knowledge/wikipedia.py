@@ -50,7 +50,7 @@ def get_first_paragraph(json_content):
         data = {}
         try:
             data['title'] = content['title']
-            data['intro'] = _clean_paragraph(content['revisions'][0]['*'])
+            data['content'] = _clean_paragraph(content['revisions'][0]['*'])
             print "[+] Found: %s" % content['title']
         except KeyError:
             print "[-] Missing: %s" % content['title']
