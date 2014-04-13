@@ -2,8 +2,8 @@ studysheet
 ==========
 
 StudySheet is a python script that takes a list of concepts,
-and creates a pdf study sheet with a paragraph introduction
-of each concept taken from Wikipedia or WolframAlpha.
+and creates a word document or PDF studysheet with an brief
+introduction of each concept taken from Wikipedia or WolframAlpha.
 
 ## Milestone Tasks
 1. Design modular project skeleton
