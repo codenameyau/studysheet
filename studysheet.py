@@ -15,11 +15,12 @@ def main():
     Reads content of 'wordlist.txt' and generates a file
     containing definitions of concepts in 'output/'
     """
-    FILENAME = 'wordlist.txt'
+    # FILENAME = 'wordlist.txt'
+    FILENAME = 'wolfram-wordlist.txt'
     wordlist = []
     with open(FILENAME) as f:
         wordlist = f.read().split('\n')
-        definitions.create_studysheet(wordlist, 'wikipedia')
+        definitions.create_studysheet(wordlist, 'wolfram')
 
 
 if __name__ == '__main__':

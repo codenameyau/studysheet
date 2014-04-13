@@ -12,6 +12,7 @@ Future sources:
 """
 import sys
 import wikipedia
+import wolfram
 import transcriber
 
 
@@ -39,7 +40,17 @@ def ask_wikipedia(wordlist):
     return wikipedia.get_first_paragraph(json_content)
 
 
+def ask_wolfram(wordlist):
+    """
+    Internal: (List) -> List
+
+    Sends requests to WolframAlpha to ask for definitions
+    """
+    pass
+
+
 # Functions
 SOURCES = {
     'wikipedia' : ask_wikipedia,
+    'wolfram'   : ask_wolfram,
 }
