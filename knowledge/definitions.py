@@ -36,8 +36,8 @@ def ask_wikipedia(wordlist):
 
     Sends requests to wikipedia to retrieve definitions.
     """
-    json_content = wikipedia.send_requests(wordlist)
-    return wikipedia.get_first_paragraph(json_content)
+    content = wikipedia.send_requests(wordlist)
+    return wikipedia.get_first_paragraph(content)
 
 
 def ask_wolfram(wordlist):
@@ -46,7 +46,8 @@ def ask_wolfram(wordlist):
 
     Sends requests to WolframAlpha to ask for definitions
     """
-    pass
+    content = wolfram.send_requests(wordlist)
+    print content
 
 
 # Functions

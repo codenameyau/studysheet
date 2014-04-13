@@ -19,12 +19,12 @@ def main():
     Reads content of a wordlist and generates a document
     containing definitions of concepts in 'studysheet-docs/'
     """
-    FILENAME = 'wordlists/wiki-list.txt'
-    # FILENAME = 'wordlists/wolfram-list.txt'
+    # FILENAME = 'wordlists/wiki-list.txt'
+    FILENAME = 'wordlists/wolfram-list.txt'
     wordlist = []
     with open(FILENAME) as f:
         wordlist = f.read().split('\n')
-        definitions.create_studysheet(wordlist, 'wikipedia')
+        definitions.create_studysheet(wordlist, 'wolfram')
 
 
 if __name__ == '__main__':
