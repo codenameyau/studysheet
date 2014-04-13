@@ -7,8 +7,8 @@ introduction of each concept taken from Wikipedia or WolframAlpha.
 
 ## API Keys
 To use the WolframAlpha module, you must sign up for an
-API key at [http://products.wolframalpha.com/api/](http://products.wolframalpha.com/api/).
-Then edit `knowledge/apikeys.py` and paste your API key inside `WOLFRAM`.
+API key at [here](http://products.wolframalpha.com/api/).
+Then edit `knowledge/apikeys.py` and set `WOLFRAM` to your API key.
 
 ## Milestone Tasks
 * [Done] Design modular project skeleton

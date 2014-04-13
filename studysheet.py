@@ -1,5 +1,5 @@
 """
-StudySheet - Simple study sheets
+StudySheet - Automated Study Sheets
 
 Available Sources:
 1. wikipedia
@@ -19,12 +19,11 @@ def main():
     Reads content of a wordlist and generates a document
     containing definitions of concepts in 'studysheet-docs/'
     """
-    # FILENAME = 'wordlists/wiki-list.txt'
-    FILENAME = 'wordlists/wolfram-list.txt'
-    wordlist = []
+    FILENAME = 'wordlists/wiki-list.txt'
+    # FILENAME = 'wordlists/wolfram-list.txt'
     with open(FILENAME) as f:
-        wordlist = f.read().split('\n')
-        definitions.create_studysheet(wordlist, 'wolfram')
+        wordlist = f.read().rstrip().split('\n')
+        definitions.create_studysheet(wordlist, 'wikipedia')
 
 
 if __name__ == '__main__':

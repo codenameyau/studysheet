@@ -25,7 +25,7 @@ def create_studysheet(wordlist, source):
     """
     if source in SOURCES:
         content = SOURCES[source](wordlist)
-        transcriber.generate_doc(content, source)
+        # transcriber.generate_doc(content, source)
     else:
         sys.exit("EXIT: %s is not available" % source)
 
