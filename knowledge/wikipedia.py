@@ -1,9 +1,10 @@
 """
 knowledge: wikipedia.py
 
-Module for handling API requests to wikipedia
+Module for handling wikipedia requests and responses
 """
 from bs4 import BeautifulSoup
+import truthseeker
 import requests
 import json
 import re
@@ -15,14 +16,22 @@ def send_requests(wordlist):
     """
     Public: (List) -> Dictionary | None
 
-    Sends requests to WikiMedia API. If requests is successful,
+    Sends request to WikiMedia API. If requests is successful,
     returns a Dictionary from the response JSON content.
 
     Example:
     >> send_requests(['red', 'green', 'blue'])
     """
-    # Builds url and removes trailing '|'
-    url = pack_url('|'.join(wordlist))
+    query = {
+        'action'    : 'query',
+        'format'    : 'json',
+        'titles'    : '|'.join(wordlist),
+        'prop'      : 'revisions',
+        'rvprop'    : 'content',
+        'rvsection' : '0',
+        'rvparse'   : 'true'
+    }
+    url = truthseeker.pack_url(API_ROOT, query)
     req = requests.get(url)
     if req.status_code == 200:
         return json.loads(req.content)
@@ -41,39 +50,13 @@ def get_first_paragraph(json_content):
         data = {}
         try:
             data['title'] = content['title']
-            data['intro'] = _clean_paragraph(content['revisions'][0]['*'])
+            data['content'] = _clean_paragraph(content['revisions'][0]['*'])
             print "[+] Found: %s" % content['title']
         except KeyError:
             print "[-] Missing: %s" % content['title']
             continue
         parsed_entries.append(data)
     return parsed_entries
-
-
-def pack_url(titles):
-    """
-    Internal: (String) -> String
-
-    Creates a URL for api request to WikiMedia.
-    """
-    query = {
-        'action'    : 'query',
-        'format'    : 'json',
-        'titles'    : titles,
-        'prop'      : 'revisions',
-        'rvprop'    : 'content',
-        'rvsection' : '0',
-        'rvparse'   : 'true'
-    }
-
-    # Build URL for API request
-    query_string = ''
-    for key, value in query.iteritems():
-        if not query_string:
-            query_string += '?%s=%s' % (key, value)
-        else:
-            query_string += '&%s=%s' % (key, value)
-    return API_ROOT + query_string
 
 
 def _clean_paragraph(html):

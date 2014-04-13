@@ -14,17 +14,17 @@ import docx
 OUTPUT_DIR = 'studysheets/'
 
 
-def generate_doc(content, source):
+def generate_doc(content, source, docformat):
     """
     Public: (List, String) -> None
 
     Creates a word document, formatted based on source.
     """
     _check_dir_exists()
-    if source in WORD_FORMATTING:
-        WORD_FORMATTING[source](content, source)
+    if docformat in WORD_FORMATTING:
+        WORD_FORMATTING[docformat](content, source)
     else:
-        sys.exit('Formatting for %s is missing' % source)
+        sys.exit('Formatting for %s is missing' % docformat)
 
 
 def _check_dir_exists():
@@ -50,29 +50,20 @@ def _save_document(document, source):
     print "Saved document in: %s" % docname
 
 
-def _format_wikipedia_doc(content, source):
+def _format_simple(content, source):
     """
     Private: (List) -> None
 
-    Generates document with custom wikipedia formatting.
+    Generates document with simple formatting with a
+    title heading and a paragraph for each content.
     """
     document = docx.Document()
     for entry in content:
         document.add_heading(entry['title'], 1)
-        document.add_paragraph(entry['intro'])
+        document.add_paragraph(entry['content'])
     _save_document(document, source)
 
 
-def _format_wolfram_doc(content, source):
-    """
-    Private: (List) -> None
-
-    Generates document with custom formatting for wolfram.
-    """
-    pass
-
-
 WORD_FORMATTING = {
-    'wikipedia' : _format_wikipedia_doc,
-    'wolfram'   : _format_wolfram_doc
+    'simple' : _format_simple,
 }

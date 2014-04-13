@@ -16,19 +16,19 @@ import wolfram
 import transcriber
 
 
-def create_studysheet(wordlist, source):
+def create_studysheet_doc(wordlist, source, docformat='simple'):
     """
-    Public: (List, String) -> List
+    Public: (List, String, String) -> None
 
-    Gets all definitions of words in wordlist from source.
-    Calls the corresponding function from SOURCES.
+    Creates a study sheet document from wordlist by requesting
+    data from source. Outputs content in desired format.
 
     Example:
-    >> create_studysheet(['love', 'bug'], 'wikipedia')
+    >> create_studysheet(['love', 'bug'], 'wikipedia', 'simple')
     """
     if source in SOURCES:
         content = SOURCES[source](wordlist)
-        transcriber.generate_doc(content, source)
+        transcriber.generate_doc(content, source, docformat)
     else:
         sys.exit("EXIT: %s is not available" % source)
 
@@ -49,8 +49,7 @@ def ask_wolfram(wordlist):
 
     Sends requests to WolframAlpha to ask for questions.
     """
-    content = wolfram.send_requests(wordlist)
-    print content
+    return wolfram.send_requests(wordlist)
 
 
 # Functions

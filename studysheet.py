@@ -1,15 +1,12 @@
 """
 StudySheet - Automated Study Sheets
 
+This is a sample command-line program that uses
+the knowledge module to create study sheets.
+
 Available Sources:
 1. wikipedia
 2. wolfram
-
-Future Milestones:
-1. Integrate with WikiMedia API
-2. Integrate with WolframAlpha API
-3. Save results as a pdf through PyTeX
-4. Parse and include images in pdfs
 """
 from knowledge import definitions
 
@@ -23,7 +20,7 @@ def main():
     # FILENAME = 'wordlists/wolfram-list.txt'
     with open(FILENAME) as f:
         wordlist = f.read().rstrip().split('\n')
-        definitions.create_studysheet(wordlist, 'wikipedia')
+        definitions.create_studysheet_doc(wordlist, 'wikipedia', 'simple')
 
 
 if __name__ == '__main__':
