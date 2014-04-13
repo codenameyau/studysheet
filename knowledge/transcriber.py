@@ -11,7 +11,7 @@ import docx
 
 
 # Directory to output documents
-OUTPUT_DIR = 'studysheet-docs/'
+OUTPUT_DIR = 'studysheets/'
 
 
 def generate_doc(content, source):
@@ -63,6 +63,16 @@ def _format_wikipedia_doc(content, source):
     _save_document(document, source)
 
 
+def _format_wolfram_doc(content, source):
+    """
+    Private: (List) -> None
+
+    Generates document with custom formatting for wolfram.
+    """
+    pass
+
+
 WORD_FORMATTING = {
-    'wikipedia' : _format_wikipedia_doc
+    'wikipedia' : _format_wikipedia_doc,
+    'wolfram'   : _format_wolfram_doc
 }

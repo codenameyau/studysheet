@@ -22,6 +22,9 @@ def create_studysheet(wordlist, source):
 
     Gets all definitions of words in wordlist from source.
     Calls the corresponding function from SOURCES.
+
+    Example:
+    >> create_studysheet(['love', 'bug'], 'wikipedia')
     """
     if source in SOURCES:
         content = SOURCES[source](wordlist)
@@ -36,17 +39,18 @@ def ask_wikipedia(wordlist):
 
     Sends requests to wikipedia to retrieve definitions.
     """
-    json_content = wikipedia.send_requests(wordlist)
-    return wikipedia.get_first_paragraph(json_content)
+    content = wikipedia.send_requests(wordlist)
+    return wikipedia.get_first_paragraph(content)
 
 
 def ask_wolfram(wordlist):
     """
     Internal: (List) -> List
 
-    Sends requests to WolframAlpha to ask for definitions
+    Sends requests to WolframAlpha to ask for questions.
     """
-    pass
+    content = wolfram.send_requests(wordlist)
+    print content
 
 
 # Functions

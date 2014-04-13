@@ -21,8 +21,8 @@ def send_requests(wordlist):
     Example:
     >> send_requests(['red', 'green', 'blue'])
     """
-    # Builds up url and removes trailing '|'
-    url = pack_url('|'.join(wordlist)[:-1])
+    # Builds url and removes trailing '|'
+    url = pack_url('|'.join(wordlist))
     req = requests.get(url)
     if req.status_code == 200:
         return json.loads(req.content)
@@ -39,8 +39,13 @@ def get_first_paragraph(json_content):
     for entry in pages:
         content = pages[entry]
         data = {}
-        data['title'] = content['title']
-        data['intro'] = _clean_paragraph(content['revisions'][0]['*'])
+        try:
+            data['title'] = content['title']
+            data['intro'] = _clean_paragraph(content['revisions'][0]['*'])
+            print "[+] Found: %s" % content['title']
+        except KeyError:
+            print "[-] Missing: %s" % content['title']
+            continue
         parsed_entries.append(data)
     return parsed_entries
 
@@ -64,11 +69,10 @@ def pack_url(titles):
     # Build URL for API request
     query_string = ''
     for key, value in query.iteritems():
-        if key:
-            if not query_string:
-                query_string += '?%s=%s' % (key, value)
-            else:
-                query_string += '&%s=%s' % (key, value)
+        if not query_string:
+            query_string += '?%s=%s' % (key, value)
+        else:
+            query_string += '&%s=%s' % (key, value)
     return API_ROOT + query_string
 
 
@@ -79,5 +83,8 @@ def _clean_paragraph(html):
     Finds first paragraph, strips html tags and citations.
     Paragraph is returned with unicode characters.
     """
-    first_paragraph = BeautifulSoup(html).p.get_text()
-    return re.sub(r'\[\d+\]', '', first_paragraph)
+    soup = BeautifulSoup(html)
+    paragraphs = soup.find_all('p', limit=3)
+    for entry in paragraphs:
+        if len(entry) > 5:
+            return re.sub(r'\[\d+\]', '', entry.get_text())
