@@ -13,7 +13,7 @@ API_ROOT = 'https://en.wikipedia.org/w/api.php'
 
 def send_requests(wordlist):
     """
-    Public: (List) -> Dictionary
+    Public: (List) -> Dictionary | None
 
     Sends requests to WikiMedia API. If requests is successful,
     returns a Dictionary from the response JSON content.
@@ -21,7 +21,8 @@ def send_requests(wordlist):
     Example:
     >> send_requests(['red', 'green', 'blue'])
     """
-    url = pack_url(_normalize_titiles(wordlist))
+    # Builds up url and removes trailing '|'
+    url = pack_url('|'.join(wordlist)[:-1])
     req = requests.get(url)
     if req.status_code == 200:
         return json.loads(req.content)
@@ -69,17 +70,6 @@ def pack_url(titles):
             else:
                 query_string += '&%s=%s' % (key, value)
     return API_ROOT + query_string
-
-
-def _normalize_titiles(wordlist):
-    """
-    Private: (List) -> List
-
-    Builds up a string from words in wordlist and
-    seperates each word with a '|' for titles query.
-    """
-    # Removes trailing '|'
-    return '|'.join(wordlist)[:-1]
 
 
 def _clean_paragraph(html):
