@@ -14,17 +14,17 @@ import docx
 OUTPUT_DIR = 'studysheets/'
 
 
-def generate_doc(content, source, format):
+def generate_doc(content, source, docformat):
     """
     Public: (List, String) -> None
 
     Creates a word document, formatted based on source.
     """
     _check_dir_exists()
-    if format in WORD_FORMATTING:
-        WORD_FORMATTING[format](content, source)
+    if docformat in WORD_FORMATTING:
+        WORD_FORMATTING[docformat](content, source)
     else:
-        sys.exit('Formatting for %s is missing' % format)
+        sys.exit('Formatting for %s is missing' % docformat)
 
 
 def _check_dir_exists():
